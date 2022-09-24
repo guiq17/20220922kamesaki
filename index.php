@@ -177,15 +177,115 @@ $animals = [
   echo $name."さんが好きな動物は".$animal."です";
   echo "<br>";
 }
+?>
 
 <table>
-<?php
-for($a = 1; $a <= 9; $a++) {
-  echo '<tr>';
-  for($b = 1; $b <= 9; $b++) {
-    echo '<td>'.$a*$b.'</td>';
+  <?php
+  for ($a = 1; $a <= 9; $a++) {
+    echo '<tr>';
+    for ($b = 1; $b <= 9; $b++) {
+      echo '<td>' . $a * $b . '</td>';
+    }
+    echo '</tr>';
   }
-  echo '</tr>';
-}
-?>
+  ?>
 </table>
+
+<?php
+function addNumber($a, $b)
+{
+  $add = $a + $b;
+  return $add;
+}
+
+$total = addNumber(2, 3);
+echo $total;
+echo "<br>";
+?>
+
+<?php
+function outputHello()
+{
+  echo "Hello world";
+}
+
+outputHello();
+echo "<br>";
+?>
+
+<?php //問題1
+function exam($score1, $score2, $score3) {
+  $total = $score1 + $score2 + $score3;
+  if($total > 210) {
+    echo $total."点なので合格です";
+  } else {
+    echo $total."点なので不合格です";
+  }
+}
+echo(exam(80,60,90));
+echo "<br>";
+?>
+
+<?php //問題2
+//①四角形の面積
+function getSquareArea($base, $height)
+{
+  return $base * $height;
+}
+//②三角形の面積
+function getTriangleArea($base, $height)
+{
+  return $base * $height / 2;
+}
+//③台形の面積
+function getTrapezoidArea($upperBase, $lowerBase, $height)
+{
+  return ($upperBase + $lowerBase) * $height / 2;
+}
+
+echo getSquareArea(5,5)."\n";
+echo getTriangleArea(7,8)."\n";
+echo getTrapezoidArea(4,5,4);
+echo "<br>";
+?>
+
+<?php
+try {
+  undefinedFunction(); //実行する処理
+} catch(\Throwable $th) {
+  echo 'catch'."\n"; //実行する処理
+} finally {
+  echo "この行は実行されます"; //実行する処理
+}
+echo "<br>";
+?>
+
+<?php
+try {
+  throw new Exception('例外に投げます');
+} catch(Exception $e) {
+  echo $e->getMessage(),"\n";
+} finally {
+  echo "この行は実行されます". "\n";
+}
+echo "<br>";
+?>
+
+<form action="result.php" method="post">
+  お名前:<input type="text" name="my_name" />
+  <br>
+  ご希望商品:
+  <input type="radio" name="choices" value="Aセット"/>Aセット
+  <input type="radio" name="choices" value="Bセット"/>Bセット
+  <input type="radio" name="choices" value="Cセット"/>Cセット
+  <br>
+  注文数: <select name="number" id="">
+    <?php for($i = 1; $i <= 10; $i++) {?>
+      <option value="<?php echo $i;?>">
+        <?php echo $i;?>
+      </option>
+    <?php } ?>
+  </select>
+  <br>
+  <input type="submit" value="送信"/>
+</form>
